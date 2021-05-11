@@ -2,21 +2,22 @@
 extern crate diesel;
 extern crate dotenv;
 
-use diesel::prelude::*;
 use diesel::pg::PgConnection;
+use diesel::prelude::*;
+use dotenv::dotenv;
 use r2d2;
 use r2d2_diesel::ConnectionManager;
 use rocket::{Outcome, Request, State};
 use rocket::http::Status;
 use rocket::request::{self, FromRequest};
-use std::ops::Deref;
 
-use dotenv::dotenv;
 use std::env;
+use std::ops::Deref;
 
 pub mod schema;
 pub mod models;
 pub mod repository;
+pub mod requests;
 
 type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
 
@@ -45,12 +46,10 @@ impl<'a, 'r> FromRequest<'a, 'r> for DbConn {
 
 impl Deref for DbConn {
     type Target = PgConnection;
-
     fn deref(&self) -> &Self::Target {
         &self.0
     }
 }
-
 
 pub fn establish_connection() -> PgConnection {
     dotenv().ok();

@@ -13,6 +13,15 @@ dotenv = "0.15.0"
 serde = { version = "1.0.125", features = ["derive"] }
 serde_derive = "1.0.125"
 serde_json = "1.0.64"
+jwt = "0.13.0"
+sha2 = "0.9"
+crypto-mac = "0.10"
+digest = "0.9"
+hmac = "0.10"
+rust-crypto = "0.2.36"
+rustc-serialize = "0.3.24"
+argon2 = "0.2"
+rand_core = { version = "0.6", features = ["std"] }
 
 [dependencies.rocket]
 version = "0.4.7"
